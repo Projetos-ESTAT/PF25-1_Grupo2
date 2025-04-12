@@ -22,3 +22,16 @@ source("rdocs/source/packages.R")
 # de teste depreciados, ou ao menos deixando como comentário. Dê preferência
 # as funções dos pacotes contidos no Tidyverse para realizar suas análises.
 # ---------------------------------------------------------------------------- #
+# codigo primeira análise
+dados <- read.csv("C:/Users/Usuario/Downloads/Dados PcD.csv")
+library(ggplot2)
+grafico1 = ggplot(dados) +
+  aes(x = Quant_Recurso_PCD , y = Quant_Recurso_Total) +
+  geom_point(colour = "#A11D21", size = 3) +
+  labs(
+    x = "Quantidade de recursos PCD)",
+    y = "Quantidade de recursos totais)"
+  ) +
+  theme_estat()
+
+grafico1
