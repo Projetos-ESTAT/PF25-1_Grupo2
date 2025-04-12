@@ -26,11 +26,23 @@ tinytex::install_tinytex()
 
 Esse template foi criado para o alocado conseguir observar como ficaria sua análise o arquivo principal. É daqui que o gerente de projetos irá copiar a análise e inserir no documento principal que gerará o relatório estatístico.
 
-# Análises
+# Análise da Quantidade de recursos PCD X Quantidade de recursos totais
+Essas são duas análises do tipo quantitativas discretas, pois representam quantidades inteiras,até porque são contagens de pessoas.Uma delas refere-se ao número de funcionários ou colaboradores com deficiência (PcD) e a outra a quantidade total de indivíduos (incluindo PcDs e não PcDs)
+```{r}
+#| label: fig-
+#| fig-cap: "Gráfico de Dispersão-Quantidade de recursos PCD X Quantidade de recursos totais "
 
-## Análise 5
 
-## Análise 6
+grafico1
+```
+O gráfico é um gráfico de dispersão que mostra a relação entre Eixo X: Quantidade de recursos PcD e o eixo Y: Quantidade de recursos totais.
+Cada ponto indica uma observação(e.g. , uma unidade, um setor) e a posição do ponto mostra quantas pessoas PcD existem em relação ao total de pessoas. 
+Os pontos formando uma subida da esquerda para direita, significa mais PcDs conforme aumenta o total, isso sugere uma correlação positiva.
+Ou seja, pelo gráfico dá para ver que possui uma grande concentração de pessoas PcD, em decorrência do total de pessoas. Mas também é possível analisar que quanto mais cresce a população em geral, menor é o tamanho da amostra (Quantidade pessoas PcD).
+
+## Análise da Variação de recursos para PCD em cada estado da região Centro-Oeste
+
+## Análise Quantidade de beneficiários PCD por região de 2013 a 2023
 
 ```{r}
 #| label: fig-
