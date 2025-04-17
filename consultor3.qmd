@@ -41,6 +41,46 @@ Os pontos formando uma subida da esquerda para direita, significa mais PcDs conf
 Ou seja, pelo gráfico dá para ver que possui uma grande concentração de pessoas PcD, em decorrência do total de pessoas. Mas também é possível analisar que quanto mais cresce a população em geral, menor é o tamanho da amostra (Quantidade pessoas PcD).
 
 ## Análise da Variação de recursos para PCD em cada estado da região Centro-Oeste
+Os resultados obtidos a partir da análise dos dados de recurso (PCD) na região Centro-Oeste foram calculados para cada estado, considerando o total de recursos por ano e a média, variância e desvio padrão desses valores ao longo do tempo. A partir dessas estatísticas, pôde-se observar como os recursos têm se comportado em termos de distribuição e variabilidade em cada estado da região (Distrito Federal, Goiás, Mato Grosso e Mato Grosso do Sul). 
+
+**Média de Recursos (Distrito Federal)**: O Distrito Federal apresenta uma média de aproximadamente R$ 206,5 milhões alocados para PCD, sendo o valor mais baixo entre os estados da região.
+**Variância e Desvio Padrão**: A variância cerca de R$ 200,9 trilhões e o desvio padrão aproximadamente R$ 141,7 milhões indicam uma grande dispersão nos valores anuais dos recursos, sugerindo que a distribuição dos recursos ao longo dos anos pode ter variado bastante.
+
+**Média de Recursos (Goiás)**:Goiás tem a maior média de recursos, cerca de R$ 619,7 milhões.
+**Variância e Desvio Padrão**: Com uma variância de aproximadamente R$ 184,2 trilhões e um desvio padrão de R$ 429,2 milhões, os recursos em Goiás mostram uma alta dispersão, apesar da média elevada,teve anos com alocações bem variadas.
+
+**Média de Recursos (Mato Grosso)**: Mato Grosso alocou, em média, cerca de R$ 337,7 milhões, um valor intermediário entre o Distrito Federal e Goiás.
+**Variância e Desvio Padrão**: A variância de aproximadamente R$ 43,8 trilhões e o desvio padrão de R$ 209,3 milhões indicam uma variação considerável, mas com menor intensidade em comparação com Goiás.
+
+**Média de Recursos (Mato Grosso do Sul)**: Mato Grosso do Sul teve uma média de alocação de R$ 301,2 milhões, sendo mais baixa que a de Goiás, mas ainda significativa em relação ao Distrito Federal.
+**Variância e Desvio Padrão**: A variância de cerca de R$ 42,5 trilhões e o desvio padrão de R$ 206,3 milhões mostram que, assim como Mato Grosso, houve uma variação considerável nos recursos ao longo dos anos, mas com menor intensidade quando comparado a Goiás.
+
+```{r}
+#| label: fig-1
+#| fig-cap: "Análises "
+
+
+estatisticas
+```
+
+
+
+```{r}
+#| label: fig-2
+#| fig-cap: "Correlação dos Estados da região CENTRO-OESTE"
+
+
+matriz_correlacao
+```
+
+A análise de correlação entre os estados do Distrito Federal, Goiás, Mato Grosso e Mato Grosso do Sul revelou uma forte relação positiva entre os valores de Total_Recursos destinados às pessoas com deficiência (PCD) ao longo dos anos de 2003 até 2023.
+A correlação entre **Distrito Federal e Goiás** é 0,9991, o que indica uma associação extreamente forte entre os valores de recursos ao longo do tempo.
+
+A correlação entre **Distrito Federal e Mato Grosso** é 0,9978, também indicando uma forte relação positiva.
+
+A correlação entre **Distrito Federal e Mato Grosso do Sul** é 0,9913, sugere a correlação mais baixa dentre as outras,porém ainda há uma associação positiva muito forte.
+
+Similarmente, as correlações entre Goiás, Mato Grosso e Mato Grosso do Sul também são extremamente altas, variando entre 0,9945 e 0,9981, evidenciando que os recursos destinados a PCDs nesses estados seguem padrões muito semelhantes ao longo do tempo.
 
 ## Análise Quantidade de beneficiários PCD por região de 2013 a 2023
 
