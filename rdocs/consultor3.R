@@ -35,3 +35,27 @@ grafico1 = ggplot(dados) +
   theme_estat()
 
 grafico1
+
+# codigo segunda análise 
+centro_oeste <- dados %>%
+  filter(UF %in% c("Goiás", "Mato Grosso", "Mato Grosso do Sul", "Distrito Federal")) %>%
+  select(UF, Ano, Quant_Recurso_PCD)
+
+variacao_recursos <- centro_oeste %>%
+  group_by(UF, Ano) %>%
+  summarise(Total_Recursos = sum(Quant_Recurso_PCD, na.rm = TRUE)) %>%
+  arrange(UF, Ano)
+
+estatisticas <- variacao_recursos %>%
+  group_by(UF) %>%
+  summarise(
+    Media = mean(Total_Recursos, na.rm = TRUE),
+    Variância = var(Total_Recursos, na.rm = TRUE),
+    Desvio_Padrao = sd(Total_Recursos, na.rm = TRUE)
+  )
+knitr::kable(estatisticas, caption = "Estatísticas descritivas por UF")
+
+dados_largos <- variacao_recursos %>%
+  pivot_wider(names_from = UF, values_from = Total_Recursos)
+matriz_correlacao <- cor(dados_largos[, -1], use = "complete.obs")
+print(matriz_correlacao)
