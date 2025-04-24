@@ -55,7 +55,69 @@ estatisticas <- variacao_recursos %>%
   )
 knitr::kable(estatisticas, caption = "Estatísticas descritivas por UF")
 
-dados_largos <- variacao_recursos %>%
-  pivot_wider(names_from = UF, values_from = Total_Recursos)
-matriz_correlacao <- cor(dados_largos[, -1], use = "complete.obs")
-print(matriz_correlacao)
+#código
+library(knitr)
+estatisticas <- c("Média", "Desvio Padrão", "Variância")
+df <- data.frame(
+  Estatística = estatisticas,
+  Distrito_Federal = c(206.5, 141.7, 200.0e12),
+  Goias = c(619.7, 429.2, 184.2e12),
+  Mato_Grosso = c(337.7, 209.3, 43.8e12),
+  Mato_Grosso_do_Sul = c(301.2, 206.3, 42.5e12)
+)
+# Formatando os valores com sufixo "Milhões" ou "Trilhões"
+formatar_valor <- function(valor, estat) {
+  if (estat == "Variância") {
+    paste0(formatC(valor / 1e12, format = "f", digits = 1, big.mark = "."), " Trilhões")
+  } else {
+    paste0(formatC(valor, format = "f", digits = 1, big.mark = "."), " Milhões")
+  }
+}
+# Aplicando formatação a cada coluna
+df_formatada <- df
+df_formatada$Distrito_Federal <- mapply(formatar_valor, df$Distrito_Federal, df$Estatística)
+df_formatada$Goias <- mapply(formatar_valor, df$Goias, df$Estatística)
+df_formatada$Mato_Grosso <- mapply(formatar_valor, df$Mato_Grosso, df$Estatística)
+df_formatada$Mato_Grosso_do_Sul <- mapply(formatar_valor, df$Mato_Grosso_do_Sul, df$Estatística)
+# Renderizando a tabela com kable
+kable(df_formatada, format = "latex", booktabs = TRUE,
+      caption = "Medidas resumo da(o) [nome da variável]",
+      col.names = c("Estatística", "Distrito Federal", "Goiás", "Mato Grosso", "Mato Grosso do Sul"),
+      align = "lrrrr")
+
+# código terceira análise 
+library(dplyr)
+benef_por_regiao <- dados %>%
+  filter(Ano >= 2013 & Ano <= 2023) %>%
+  group_by(Reg, Ano) %>%
+  summarise(Total_Beneficiarios_PCD = sum(Quant_Beneficiario_PCD, na.rm = TRUE)) %>%
+  arrange(Reg, Ano)
+print(benef_por_regiao)
+
+#código
+estatisticas_regiao <- benef_por_regiao %>%
+  group_by(Reg) %>%
+  summarise(
+    Media = mean(Total_Beneficiarios_PCD, na.rm = TRUE),
+    Mediana = median(Total_Beneficiarios_PCD, na.rm = TRUE),
+    Variancia = var(Total_Beneficiarios_PCD, na.rm = TRUE),
+    Desvio_Padrao = sd(Total_Beneficiarios_PCD, na.rm = TRUE),
+    Minimo = min(Total_Beneficiarios_PCD, na.rm = TRUE),
+    Maximo = max(Total_Beneficiarios_PCD, na.rm = TRUE)
+  )
+estatisticas_regiao_rounded <- estatisticas_regiao %>%
+  mutate(across(where(is.numeric), ~round(.x, 2)))
+print(estatisticas_regiao_rounded)
+
+#código
+tabela_media <- data.frame(
+  Estatística = c("Média", "Mediana", "Variância", "Desvio Padrão", "Mínimo", "Máximo"),
+  O_que_mede = c(
+    "Tendência central (valor típico)",
+    "Valor do meio (central) dos dados",
+    "Dispersão ao quadrado, medida da variação",
+    "Dispersão (em valores reais) ao redor da média",
+    "Valor mais baixo registrado",
+    "Valor mais alto registrado"
+  )
+print(tabela_media)
