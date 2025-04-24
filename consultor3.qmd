@@ -29,7 +29,7 @@ Esse template foi criado para o alocado conseguir observar como ficaria sua aná
 # Análise da Quantidade de recursos PCD X Quantidade de recursos totais
 Essas são duas análises do tipo quantitativas discretas, pois representam quantidades inteiras,até porque são contagens de pessoas.Uma delas refere-se ao número de funcionários ou colaboradores com deficiência (PcD) e a outra a quantidade total de indivíduos (incluindo PcDs e não PcDs)
 ```{r}
-#| label: fig-
+#| label: fig-0
 #| fig-cap: "Gráfico de Dispersão-Quantidade de recursos PCD X Quantidade de recursos totais "
 
 
@@ -41,7 +41,15 @@ Os pontos formando uma subida da esquerda para direita, significa mais PcDs conf
 Ou seja, pelo gráfico dá para ver que possui uma grande concentração de pessoas PcD, em decorrência do total de pessoas. Mas também é possível analisar que quanto mais cresce a população em geral, menor é o tamanho da amostra (Quantidade pessoas PcD).
 
 ## Análise da Variação de recursos para PCD em cada estado da região Centro-Oeste
-Os resultados obtidos a partir da análise dos dados de recurso (PCD) na região Centro-Oeste foram calculados para cada estado, considerando o total de recursos por ano e a média, variância e desvio padrão desses valores ao longo do tempo. A partir dessas estatísticas, pôde-se observar como os recursos têm se comportado em termos de distribuição e variabilidade em cada estado da região (Distrito Federal, Goiás, Mato Grosso e Mato Grosso do Sul). 
+Os resultados obtidos a partir da análise dos dados de recurso (PCD) na região Centro-Oeste foram calculados para cada estado, considerando o total de recursos por ano e a média, variância e desvio padrão desses valores ao longo do tempo. A partir dessas estatísticas, pôde-se observar como os recursos têm se comportado em termos de distribuição e variabilidade em cada estado da região (Distrito Federal, Goiás, Mato Grosso e Mato Grosso do Sul). À respeito da classificação das variáveis, as variáveis quantitativas são: "O número de PCDs atendidos" e "A variação anual de recursos". Já as variáveis qualitativas são: "Estados".
+```{r}
+#| label: fig-1
+#| fig-cap: "Tabela das medidas descritivas da variação de recursos para PCD na região Centro-Oeste "
+
+
+df
+```
+
 
 **Média de Recursos (Distrito Federal)**: O Distrito Federal apresenta uma média de aproximadamente R$ 206,5 milhões alocados para PCD, sendo o valor mais baixo entre os estados da região.
 **Variância e Desvio Padrão**: A variância cerca de R$ 200,9 trilhões e o desvio padrão aproximadamente R$ 141,7 milhões indicam uma grande dispersão nos valores anuais dos recursos, sugerindo que a distribuição dos recursos ao longo dos anos pode ter variado bastante.
@@ -55,42 +63,63 @@ Os resultados obtidos a partir da análise dos dados de recurso (PCD) na região
 **Média de Recursos (Mato Grosso do Sul)**: Mato Grosso do Sul teve uma média de alocação de R$ 301,2 milhões, sendo mais baixa que a de Goiás, mas ainda significativa em relação ao Distrito Federal.
 **Variância e Desvio Padrão**: A variância de cerca de R$ 42,5 trilhões e o desvio padrão de R$ 206,3 milhões mostram que, assim como Mato Grosso, houve uma variação considerável nos recursos ao longo dos anos, mas com menor intensidade quando comparado a Goiás.
 
-```{r}
-#| label: fig-1
-#| fig-cap: "Análises "
 
-
-estatisticas
-```
-
-
-
-```{r}
-#| label: fig-2
-#| fig-cap: "Correlação dos Estados da região CENTRO-OESTE"
-
-
-matriz_correlacao
-```
-
-A análise de correlação entre os estados do Distrito Federal, Goiás, Mato Grosso e Mato Grosso do Sul revelou uma forte relação positiva entre os valores de Total_Recursos destinados às pessoas com deficiência (PCD) ao longo dos anos de 2003 até 2023.
-A correlação entre **Distrito Federal e Goiás** é 0,9991, o que indica uma associação extreamente forte entre os valores de recursos ao longo do tempo.
-
-A correlação entre **Distrito Federal e Mato Grosso** é 0,9978, também indicando uma forte relação positiva.
-
-A correlação entre **Distrito Federal e Mato Grosso do Sul** é 0,9913, sugere a correlação mais baixa dentre as outras,porém ainda há uma associação positiva muito forte.
-
-Similarmente, as correlações entre Goiás, Mato Grosso e Mato Grosso do Sul também são extremamente altas, variando entre 0,9945 e 0,9981, evidenciando que os recursos destinados a PCDs nesses estados seguem padrões muito semelhantes ao longo do tempo.
 
 ## Análise Quantidade de beneficiários PCD por região de 2013 a 2023
-
+É possível identificar três tipos de variáveis presentes, sendo uma delas as variáveis temporais, que nesse caso, são os anos de 2013 a 2023. Elas ajudam a acompanhar a evolução dos dados ao longo do tempo, sendo possível analisar a evolução da quantidade de beneficiários PCDs ao longo dos anos,podendo também analisar tendências, como crescimento ou queda ao longo do tempo.
+Outra muito importante e bem notável são as variáveis geográficas, nessa estamos falando das regiões do Brasil, essas variáveis permitem comparar como as regiões se comportaram de maneira relativa entre si.
+E por fim, as variáveis de quantificação, essa é a variável que representa o número de beneficiários PCDs.
 ```{r}
-#| label: fig-
-#| fig-cap: "Gráfico "
+#| label: fig-2
+#| fig-cap: "Tabela das medidas descritivas da quantidade de beneficiários PCDs por região de 2013 a 2023"
 
 
-
+estatisticas_regiao
 ```
+```{r}
+#| label: fig-3
+#| fig-cap: "Tabela explicativa"
+
+
+tabela_media
+```
+**Média**
+É a soma de todos os valores dividida pela quantidade de anos analisados (neste caso, 11 anos de 2013 a 2023).
+Para que serve: Ela indica o valor "típico" ou "esperado" de beneficiários PCD por ano em cada região.
+É útil para ter uma noção geral do nível médio de atendimento.
+Exemplo:
+Se a média da região Nordeste é 901.700 beneficiários, isso quer dizer que, em média, essa foi a quantidade de pessoas com deficiência atendidas por ano entre 2013 e 2023.
+
+**Mediana**
+É o valor central da série de dados, ou seja, o valor que separa os dados em duas metades.
+Para que serve: A mediana é menos influenciada por valores muito altos ou muito baixos (outliers) e mostra a tendência central realista quando há variação nos dados.
+Exemplo:
+Se a mediana da região Sudeste é 788.259, isso indica que em pelo menos metade dos anos dessa região, o número de beneficiários foi menor ou igual a esse valor.
+
+**Variância**
+A variância mede o quanto os valores se afastam da média. É a média dos quadrados das diferenças entre cada valor e a média.
+Para que serve: Indica o nível de dispersão ou instabilidade nos dados. Quanto maior a variância, maior a oscilação no número de beneficiários ao longo do tempo.
+Exemplo:
+Uma variância de 8 bilhões no Sudeste mostra que os valores de beneficiários por ano flutuaram bastante em relação à média.
+
+**Desvio Padrão**
+É a raiz quadrada da variância. Ele também mede a dispersão, mas em valores absolutos (na mesma unidade dos dados).
+Para que serve: Dá uma ideia prática de quanto os dados variam da média, facilitando a interpretação em números reais.
+Exemplo:
+Se o desvio padrão no Nordeste é 66.232, isso quer dizer que, em média, os valores anuais de beneficiários variam cerca de 66 mil pessoas para cima ou para baixo em relação à média.
+
+**Mínimo**
+É o menor valor registrado no período (de 2013 a 2023).
+Para que serve: Mostra o ano com menor número de beneficiários registrados na região.
+Exemplo:
+Se o mínimo da região Norte é 214.989, então esse foi o menor número de beneficiários PCD que a região teve em um dos anos analisados.
+
+**Máximo**
+É o maior valor registrado no período.
+Para que serve: Indica o pico de atendimento a beneficiários PCD naquela região durante o período de análise.
+Exemplo:
+Se o máximo da região Sul é 289.208, esse foi o melhor ano em termos de atendimento nessa região entre 2013 e 2023.
+
 
 
 ::: {#quad- layout-align="center" quad-pos="H"}
