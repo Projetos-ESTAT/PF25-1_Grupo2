@@ -119,6 +119,15 @@ Se o mínimo da região Norte é 214.989, então esse foi o menor número de ben
 Para que serve: Indica o pico de atendimento a beneficiários PCD naquela região durante o período de análise.
 Exemplo:
 Se o máximo da região Sul é 289.208, esse foi o melhor ano em termos de atendimento nessa região entre 2013 e 2023.
+```{r}
+#| label: fig-4
+#| fig-cap: "Gráfico de linhas"
+
+
+gráfico_análise3
+```
+O gráfico apresenta a evolução anual do número de beneficiários PCD (Pessoas com Deficiência) no Brasil, organizados por região. A partir das linhas coloridas, é possível visualizar como a quantidade de beneficiários variou entre os anos analisados em cada região do país. O eixo horizontal (x) representa os anos, enquanto o eixo vertical (y) mostra a quantidade total de beneficiários registrados.
+Cada linha corresponde a uma região específica, destacada por uma cor diferente, permitindo observar e comparar padrões regionais de crescimento, estabilidade ou queda no número de beneficiários. Os pontos vermelhos sobre as linhas destacam os valores individuais para cada ano, facilitando a leitura e o acompanhamento das mudanças ao longo do tempo.
 
 
 
