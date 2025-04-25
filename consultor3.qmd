@@ -1,6 +1,6 @@
 ---
 # Nome do arquivo PDF gerado na pasta resultado
-output-file: "Nome do alocado - análise 5 e 6"
+output-file: Vinícius Bittencourt Queiroz Barreto - análise 3, 6 e 9.
 ---
 
 ```{r setup}
