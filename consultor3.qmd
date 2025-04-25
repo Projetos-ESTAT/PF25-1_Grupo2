@@ -63,6 +63,27 @@ df
 **Média de Recursos (Mato Grosso do Sul)**: Mato Grosso do Sul teve uma média de alocação de R$ 301,2 milhões, sendo mais baixa que a de Goiás, mas ainda significativa em relação ao Distrito Federal.
 **Variância e Desvio Padrão**: A variância de cerca de R$ 42,5 trilhões e o desvio padrão de R$ 206,3 milhões mostram que, assim como Mato Grosso, houve uma variação considerável nos recursos ao longo dos anos, mas com menor intensidade quando comparado a Goiás.
 
+```{r}
+#| label: fig-5
+#| fig-cap: "Gráfico de linhas da variação de recursos para PCD em cada estado da região Centro-Oeste "
+
+
+gráfico_análise2
+```
+Todos os estados da região Centro-Oeste apresentam crescimento contínuo no valor dos recursos destinados para PCDs.
+Mato Grosso do Sul apresentou um crescimento acentuado, a linha do Mato Grosso do Sul, no gráfico,  mostra um aumento gradual e consistente nos valores alocados, com destaque para os anos entre 2015 a 2023, onde os recursos aumentam significativamente.
+O valor em 2003 era de 7,1 milhões de reais e, em 2023, subiu para cerca de 720 milhões de reais. Isso indica um forte crescimento nas políticas de inclusão de PCDs no estado.
+
+Mato Grosso apresentou um crescimento moderado, o estado de Mato Grosso também apresenta um crescimento estável nos recursos alocados, mas com valores um pouco mais baixos que os de Goiás e Mato Grosso do Sul, especialmente nos anos iniciais.
+Em 2003, o valor alocado era de 10 milhões de reais, e em 2023, alcançou cerca de 754 milhões de reais. Embora o crescimento seja significativo, ainda está atrás de Goiás e Mato Grosso do Sul.
+
+Na vez do Goiás, teve um crescimento notável, ele mostrou uma expansão acelerada a partir de 2015, onde os recursos aumentam de maneira mais acentuada. Em 2003, os recursos eram de 14 milhões de reais e, em 2023, o estado alocou 1,5 bilhões de reais.
+Goiás se destaca como o estado com os valores mais altos, ultrapassando os outros estados da região, mostrando um comprometimento crescente com a inclusão de PCDs.
+
+Distrito Federal, por sua vez, mostrou um
+crescimento postivo nos últimos anos, o Distrito Federal apresenta um crescimento mais moderado comparado a Goiás, mas ainda assim é notável. Em 2003, os recursos eram de 4,4 milhões de reais e, em 2023, chegaram a 506 milhões de reais.
+A linha mostra um crescimento estável, mas em valores absolutos, o DF continua abaixo de Goiás e Mato Grosso do Sul.
+
 
 
 ## Análise Quantidade de beneficiários PCD por região de 2013 a 2023
@@ -121,7 +142,7 @@ Exemplo:
 Se o máximo da região Sul é 289.208, esse foi o melhor ano em termos de atendimento nessa região entre 2013 e 2023.
 ```{r}
 #| label: fig-4
-#| fig-cap: "Gráfico de linhas"
+#| fig-cap: "Gráfico de linhas da quantidade de beneficiários PCD por região de 2013 a 2023"
 
 
 gráfico_análise3
