@@ -121,3 +121,10 @@ tabela_media <- data.frame(
     "Valor mais alto registrado"
   )
 print(tabela_media)
+#gráfico de linha 
+gráfico_análise3 <- ggplot(benef_por_regiao) +
+  aes(x=Ano, y=Total_Beneficiarios_PCD,colour=Reg,  group= Reg) +
+  geom_line(size=1) + geom_point(colour="#A11D21",size=2) +
+  labs(x="Ano", y="Quantidade beneficiários PCD") +
+  theme_estat()
+
