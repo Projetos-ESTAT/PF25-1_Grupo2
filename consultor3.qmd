@@ -6,27 +6,15 @@ output-file: Vinícius Bittencourt Queiroz Barreto - análise 3, 6 e 9.
 ```{r setup}
 source("rdocs/source/consultor3.R")
 ```
-
-```{r}
-# Rodar apenas uma vez na vida!
-## Instalando o tinytex(pacote apenas)
-### CRAN version
-install.packages('tinytex')
-
-
-## Baixando o tinytex
-library(tinytex)
-tinytex::install_tinytex()
-```
+# Introdução
 
 
 
+#Análises
 
-# Objetivo
 
-Esse template foi criado para o alocado conseguir observar como ficaria sua análise o arquivo principal. É daqui que o gerente de projetos irá copiar a análise e inserir no documento principal que gerará o relatório estatístico.
 
-# Análise da Quantidade de recursos PCD X Quantidade de recursos totais
+## Análise da Quantidade de recursos PCD X Quantidade de recursos totais
 Essas são duas análises do tipo quantitativas discretas, pois representam quantidades inteiras,até porque são contagens de pessoas.Uma delas refere-se ao número de funcionários ou colaboradores com deficiência (PcD) e a outra a quantidade total de indivíduos (incluindo PcDs e não PcDs)
 ```{r}
 #| label: fig-0
