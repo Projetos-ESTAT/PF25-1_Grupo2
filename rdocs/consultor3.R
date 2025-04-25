@@ -84,6 +84,13 @@ kable(df_formatada, format = "latex", booktabs = TRUE,
       caption = "Medidas resumo da(o) [nome da variável]",
       col.names = c("Estatística", "Distrito Federal", "Goiás", "Mato Grosso", "Mato Grosso do Sul"),
       align = "lrrrr")
+gráfico_análise2 <- ggplot(variacao_recursos) +
+  aes(x=Ano, y=Total_Recursos,colour= UF, group=UF) +
+  geom_line(size=1) + geom_point(colour="#A11D21",size=2) +
+  labs(x="Ano", y="Quantidade de Recursos PCD (R$ milhões)") +
+  theme_estat()+
+  theme(legend.position = "right")
+gráfico_análise2
 
 # código terceira análise 
 library(dplyr)
@@ -126,5 +133,7 @@ gráfico_análise3 <- ggplot(benef_por_regiao) +
   aes(x=Ano, y=Total_Beneficiarios_PCD,colour=Reg,  group= Reg) +
   geom_line(size=1) + geom_point(colour="#A11D21",size=2) +
   labs(x="Ano", y="Quantidade beneficiários PCD") +
-  theme_estat()
+  theme_estat()+
+  theme(legend.position = "right")
+gráfico_análise3
 
