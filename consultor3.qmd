@@ -14,7 +14,8 @@ source("rdocs/source/consultor3.R")
 
 
 
-## Análise da Quantidade de recursos PCD X Quantidade de recursos totais
+## Análise 3
+Análise da Quantidade de recursos PCD X Quantidade de recursos totais
 Essas são duas análises do tipo quantitativas discretas, pois representam quantidades inteiras,até porque são contagens de pessoas.Uma delas refere-se ao número de funcionários ou colaboradores com deficiência (PcD) e a outra a quantidade total de indivíduos (incluindo PcDs e não PcDs)
 ```{r}
 #| label: fig-0
@@ -28,7 +29,8 @@ Cada ponto indica uma observação(e.g. , uma unidade, um setor) e a posição d
 Os pontos formando uma subida da esquerda para direita, significa mais PcDs conforme aumenta o total, isso sugere uma correlação positiva.
 Ou seja, pelo gráfico dá para ver que possui uma grande concentração de pessoas PcD, em decorrência do total de pessoas. Mas também é possível analisar que quanto mais cresce a população em geral, menor é o tamanho da amostra (Quantidade pessoas PcD).
 
-## Análise da Variação de recursos para PCD em cada estado da região Centro-Oeste
+## Análise 6 
+Análise da Variação de recursos para PCD em cada estado da região Centro-Oeste
 Os resultados obtidos a partir da análise dos dados de recurso (PCD) na região Centro-Oeste foram calculados para cada estado, considerando o total de recursos por ano e a média, variância e desvio padrão desses valores ao longo do tempo. A partir dessas estatísticas, pôde-se observar como os recursos têm se comportado em termos de distribuição e variabilidade em cada estado da região (Distrito Federal, Goiás, Mato Grosso e Mato Grosso do Sul). À respeito da classificação das variáveis, as variáveis quantitativas são: "O número de PCDs atendidos" e "A variação anual de recursos". Já as variáveis qualitativas são: "Estados".
 ```{r}
 #| label: fig-1
@@ -74,7 +76,8 @@ A linha mostra um crescimento estável, mas em valores absolutos, o DF continua 
 
 
 
-## Análise Quantidade de beneficiários PCD por região de 2013 a 2023
+## Análise 9
+Análise Quantidade de beneficiários PCD por região de 2013 a 2023
 É possível identificar três tipos de variáveis presentes, sendo uma delas as variáveis temporais, que nesse caso, são os anos de 2013 a 2023. Elas ajudam a acompanhar a evolução dos dados ao longo do tempo, sendo possível analisar a evolução da quantidade de beneficiários PCDs ao longo dos anos,podendo também analisar tendências, como crescimento ou queda ao longo do tempo.
 Outra muito importante e bem notável são as variáveis geográficas, nessa estamos falando das regiões do Brasil, essas variáveis permitem comparar como as regiões se comportaram de maneira relativa entre si.
 E por fim, as variáveis de quantificação, essa é a variável que representa o número de beneficiários PCDs.
