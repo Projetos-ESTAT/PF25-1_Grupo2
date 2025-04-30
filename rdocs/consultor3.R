@@ -37,15 +37,19 @@ grafico1 = ggplot(dados) +
 grafico1
 
 # codigo segunda análise 
+library(dplyr)
 centro_oeste <- dados %>%
   filter(UF %in% c("Goiás", "Mato Grosso", "Mato Grosso do Sul", "Distrito Federal")) %>%
   select(UF, Ano, Quant_Recurso_PCD)
-
+#código
 variacao_recursos <- centro_oeste %>%
   group_by(UF, Ano) %>%
-  summarise(Total_Recursos = sum(Quant_Recurso_PCD, na.rm = TRUE)) %>%
+  summarise(
+    Total_Recursos = round(sum(Quant_Recurso_PCD, na.rm = TRUE)/1e6, 1)
+  ) %>%
   arrange(UF, Ano)
 
+#código
 estatisticas <- variacao_recursos %>%
   group_by(UF) %>%
   summarise(
@@ -84,13 +88,26 @@ kable(df_formatada, format = "latex", booktabs = TRUE,
       caption = "Medidas resumo da(o) [nome da variável]",
       col.names = c("Estatística", "Distrito Federal", "Goiás", "Mato Grosso", "Mato Grosso do Sul"),
       align = "lrrrr")
-gráfico_análise2 <- ggplot(variacao_recursos) +
-  aes(x=Ano, y=Total_Recursos,colour= UF, group=UF) +
-  geom_line(size=1) + geom_point(colour="#A11D21",size=2) +
-  labs(x="Ano", y="Quantidade de Recursos PCD (R$ milhões)") +
-  theme_estat()+
-  theme(legend.position = "right")
-gráfico_análise2
+
+gráfico_análise2_medias <- ggplot(estatisticas, aes(x = UF, y = Media)) +
+  geom_col(fill = "#A11D21") +
+  geom_point(aes(y = Media), color = "white", shape = 23, size = 3) +
+  labs(
+    x = "Estados da região Centro-Oeste",
+    y = "Média dos recursos PCD"
+  ) +
+  theme_estat()
+gráfico_análise2_medias
+
+gráfico_análise2_dp <- ggplot(estatisticas, aes(x = UF, y = Desvio_Padrao)) +
+  geom_col(fill = "#A11D21") +
+  geom_point(aes(y = Desvio_Padrao), color = "white", shape = 23, size = 3) +
+  labs(
+    x = "Estados da região Centro-Oeste",
+    y = "Desvio Padrão dos recursos PCD"
+  ) +
+  theme_estat()
+gráfico_análise2_dp
 
 # código terceira análise 
 library(dplyr)
@@ -99,35 +116,9 @@ benef_por_regiao <- dados %>%
   group_by(Reg, Ano) %>%
   summarise(Total_Beneficiarios_PCD = sum(Quant_Beneficiario_PCD, na.rm = TRUE)) %>%
   arrange(Reg, Ano)
-print(benef_por_regiao)
+
 
 #código
-estatisticas_regiao <- benef_por_regiao %>%
-  group_by(Reg) %>%
-  summarise(
-    Media = mean(Total_Beneficiarios_PCD, na.rm = TRUE),
-    Mediana = median(Total_Beneficiarios_PCD, na.rm = TRUE),
-    Variancia = var(Total_Beneficiarios_PCD, na.rm = TRUE),
-    Desvio_Padrao = sd(Total_Beneficiarios_PCD, na.rm = TRUE),
-    Minimo = min(Total_Beneficiarios_PCD, na.rm = TRUE),
-    Maximo = max(Total_Beneficiarios_PCD, na.rm = TRUE)
-  )
-estatisticas_regiao_rounded <- estatisticas_regiao %>%
-  mutate(across(where(is.numeric), ~round(.x, 2)))
-print(estatisticas_regiao_rounded)
-
-#código
-tabela_media <- data.frame(
-  Estatística = c("Média", "Mediana", "Variância", "Desvio Padrão", "Mínimo", "Máximo"),
-  O_que_mede = c(
-    "Tendência central (valor típico)",
-    "Valor do meio (central) dos dados",
-    "Dispersão ao quadrado, medida da variação",
-    "Dispersão (em valores reais) ao redor da média",
-    "Valor mais baixo registrado",
-    "Valor mais alto registrado"
-  )
-)
 
 #gráfico de linha 
 gráfico_análise3 <- ggplot(benef_por_regiao) +
@@ -137,4 +128,3 @@ gráfico_análise3 <- ggplot(benef_por_regiao) +
   theme_estat()+
   theme(legend.position = "right")
 gráfico_análise3
-
