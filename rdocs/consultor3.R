@@ -131,20 +131,20 @@ benef_por_regiao <- dados %>%
 benef_por_regiao
 
 benef_por_regiao <- dados %>%
-  filter(Ano >= 2012 & Ano <= 2023) %>%
+  filter(Ano >= 2013 & Ano <= 2023) %>%
   group_by(Reg, Ano) %>%
   summarise(Total_Beneficiarios_PCD = sum(Quant_Beneficiario_PCD, na.rm = TRUE)) %>%
   arrange(Reg, Ano) %>%
   # Garantir que todos os anos apareçam para cada região
-  complete(Ano = full_seq(2012:2023, 1), fill = list(Total_Beneficiarios_PCD = 0))
+  complete(Ano = full_seq(2013:2023, 1), fill = list(Total_Beneficiarios_PCD = 0))
 
 # Criar o gráfico de linha corrigido
 gráfico_análise3 <- ggplot(benef_por_regiao, aes(x = Ano, y = Total_Beneficiarios_PCD, colour = Reg, group = Reg)) +
   geom_line(size = 1) + 
   geom_point(colour = "#A11D21", size = 2) +
   labs(x = "Ano", y = "Quantidade de beneficiários PCD", 
-       title = "Evolução de Beneficiários PCD por Região (2012-2023)") +
-  scale_x_continuous(breaks = 2012:2023, labels = 2012:2023) +
+       title = "Evolução de Beneficiários PCD por Região (2013-2023)") +
+  scale_x_continuous(breaks = 2013:2023, labels = 2013:2023) +
   theme_estat() +
   theme(
     legend.position = "right",
