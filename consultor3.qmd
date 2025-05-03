@@ -1,16 +1,19 @@
 ---
-# Nome do arquivo PDF gerado na pasta resultado
-output-file: Vinícius Bittencourt Queiroz Barreto - análise 3, 6 e 9.
+# Introdução
+output-file: Vinícius Bittencourt Queiroz Barreto - análise 1, 3 e 5.
 ---
+
 ```{r setup}
+#| include: false
 source("rdocs/consultor3.R")
 ```
 # Introdução
 
+
 # Análises 
 
 
-## Análise 3
+## Análise 1
 Análise da Quantidade de recursos PCD X Quantidade de recursos totais
 Essas são duas análises do tipo quantitativas discretas, pois representam quantidades inteiras,até porque são contagens de pessoas.Uma delas refere-se ao número de funcionários ou colaboradores com deficiência (PcD) e a outra a quantidade total de indivíduos (incluindo PcDs e não PcDs)
 
@@ -22,17 +25,26 @@ Essas são duas análises do tipo quantitativas discretas, pois representam quan
 grafico1
 ```
 
-\@ref(fig:fig-0) é um gráfico de dispersão que mostra a relação entre Eixo X: Quantidade de recursos PcD e o eixo Y: Quantidade de recursos totais.
+O $\ref{fig-0}$ é um gráfico de dispersão que mostra a relação entre Eixo X: Quantidade de recursos PcD e o eixo Y: Quantidade de recursos totais.
 Cada ponto indica uma observação(e.g. , uma unidade, um setor) e a posição do ponto mostra quantas pessoas PcD existem em relação ao total de pessoas. 
 Os pontos formando uma subida da esquerda para direita, significa mais PcDs conforme aumenta o total, isso sugere uma correlação positiva.
 Ou seja, pelo gráfico dá para ver que possui uma grande concentração de pessoas PcD, em decorrência do total de pessoas. Mas também é possível analisar que quanto mais cresce a população em geral, menor é o tamanho da amostra (Quantidade pessoas PcD).
 
-## Análise 6
+```{r}
+#| label: fig-1
+#| fig-cap: "Tabela resumo das medidas descritivas "
+
+
+tabela_resumo
+```
+A correlação de Pearson entre Quant_Recurso_PCD e Quant_Recurso_Total é de aproximadamente 0,9837, o que indica uma correlação extremamente forte e positiva entre essas duas variáveis.
+
+## Análise 3
 Análise da Variação de recursos para PCD em cada estado da região Centro-Oeste
 Os resultados obtidos a partir da análise dos dados de recurso (PCD) na região Centro-Oeste foram calculados para cada estado, considerando o total de recursos por ano e a média, variância e desvio padrão desses valores ao longo do tempo. A partir dessas estatísticas, pôde-se observar como os recursos têm se comportado em termos de distribuição e variabilidade em cada estado da região (Distrito Federal, Goiás, Mato Grosso e Mato Grosso do Sul).
 À respeito da classificação das variáveis, as variáveis quantitativas são: "O número de PCDs atendidos" e "A variação anual de recursos". Já as variáveis qualitativas são: "Estados".
 ```{r}
-#| label: fig-1
+#| label: fig-2
 #| fig-cap: "Tabela das medidas descritivas da variação de recursos para PCD na região Centro-Oeste "
 
 
@@ -40,25 +52,16 @@ df_formatada
 ```
 
 ```{r}
-#| label: fig-5
-#| fig-cap: "Gráfico de barras da variação das médias dos recursos para PCD em cada estado da região Centro-Oeste "
+#| label: fig-3
+#| fig-cap: "Gráfico de Box-Plot "
 
-gráfico_análise2_medias
+
+grafico_boxplot
 ```
-O Goiás é o estado com maior média de recursos PCD, ultrapassando 600 unidades, chegando a 619 com mais exatidão.
-Isso indica um investimento ou alocação de recursos significativamente superior em relação aos demais estados da região. Já o Distrito Federal apresenta a menor média entre os quatro estados (~206).
-Com relação ao Mato Grosso do Sul e Mato Grosso possuem médias bem próximas, de 302-338.
-
-```{r}
-#| label: fig-5
-#| fig-cap: "Gráfico de barras da variação dos desvios-padrão dos recursos para PCD em cada estado da região Centro-Oeste "
+Segundo o $\ref{fig-3}$ o Goiás possui a maior variabilidade com maiores outliers, chegando até 1.500 milhões. Distrito Federal ficando com a menor variabilidade, diante do Mato Grosso e do Mato Grosso do Sul.
 
 
-gráfico_análise2_dp
-```
-Mesmo gráfico das médias, bem auto-descritivo. De forma simplificada, Goiás com o maior pico, passando de 400, já os outros 3 estados restantes com desvios bem próximos, DF ficando pouco abaixo dos demais.
-
-## Análise 9
+## Análise 5
 Análise da quantidade de beneficiários PCD por região de 2013 a 2023
 É possível identificar três tipos de variáveis presentes, "ano" sendo uma variável quantitativa discreta e as variáveis "região" e "estado (UF)" como qualitativa nominal.
 Já sobre o gráfico, apresenta a evolução anual do número de beneficiários PCD (Pessoas com Deficiência) no Brasil, organizados por região. A partir das linhas coloridas, é possível visualizar como a quantidade de beneficiários variou entre os anos analisados em cada região do país. O eixo horizontal (x) representa os anos, enquanto o eixo vertical (y) mostra a quantidade total de beneficiários registrados.
@@ -71,12 +74,12 @@ Cada linha corresponde a uma região específica, destacada por uma cor diferent
 
 gráfico_análise3
 ```
+
 A maioria das regiões mostra crescimento ou estabilidade no número de beneficiários PcD ao longo dos anos, porém
 há uma queda acentuada em 2019, especialmente no Nordeste, seguida de uma estabilização e posterior retomada de crescimento até 2023.
 O nordeste apresenta maior número absoluto de beneficiários durante todo o período, ultrapassando 1 milhão em alguns anos Já o sudeste ocupa a segunda posição da região com maior número de beneficiários, mostrando crescimento constante de 2013 a 2018 e depois mantém-se estável, com uma recuperação em 2023.
 Por sua vez, o norte representa o menor número de beneficiários PCD, embora também mostre crescimento, especialmente a partir de 2022.
 Obs: Discrições possíveis de se ver através do gráfico foram desconsideradas nessa análise, sendo, claramente, auto-descritivas.
-
 
 
 
