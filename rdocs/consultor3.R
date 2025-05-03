@@ -36,6 +36,25 @@ grafico1 = ggplot(dados) +
 
 grafico1
 
+media_pcd <- mean(dados$Quant_Recurso_PCD, na.rm = TRUE)
+media_total <- mean(dados$Quant_Recurso_Total, na.rm = TRUE)
+mediana_pcd <- median(dados$Quant_Recurso_PCD, na.rm = TRUE)
+mediana_total <- median(dados$Quant_Recurso_Total, na.rm = TRUE)
+variancia_pcd <- var(dados$Quant_Recurso_PCD, na.rm = TRUE)
+variancia_total <- var(dados$Quant_Recurso_Total, na.rm = TRUE)
+desvio_pcd <- sd(dados$Quant_Recurso_PCD, na.rm = TRUE)
+desvio_total <- sd(dados$Quant_Recurso_Total, na.rm = TRUE)
+correlacao <- cor(dados$Quant_Recurso_PCD, dados$Quant_Recurso_Total, method = "pearson", use = "complete.obs")
+
+tabela_resumo <- data.frame(
+  Medida = c("Média", "Mediana", "Variância", "DP", "Corr de Pearson"),
+  Quant_Recurso_PCD = c(media_pcd, mediana_pcd, variancia_pcd, desvio_pcd, correlacao),
+  Quant_Recurso_Total = c(media_total, mediana_total, variancia_total, desvio_total, correlacao)
+)
+
+
+
+
 # codigo segunda análise 
 library(dplyr)
 centro_oeste <- dados %>%
@@ -61,9 +80,9 @@ knitr::kable(estatisticas, caption = "Estatísticas descritivas por UF")
 
 #código
 library(knitr)
-estatisticas <- c("Média", "Desvio Padrão", "Variância")
+estatisticas_manual <- c("Média", "DP", "Variância")
 df <- data.frame(
-  Estatística = estatisticas,
+  Estatística = estatisticas_manual,
   Distrito_Federal = c(206.5, 141.7, 200.0e12),
   Goias = c(619.7, 429.2, 184.2e12),
   Mato_Grosso = c(337.7, 209.3, 43.8e12),
@@ -72,9 +91,9 @@ df <- data.frame(
 # Formatando os valores com sufixo "Milhões" ou "Trilhões"
 formatar_valor <- function(valor, estat) {
   if (estat == "Variância") {
-    paste0(formatC(valor / 1e12, format = "f", digits = 1, big.mark = "."), " Trilhões")
+    paste0(formatC(valor / 1e12, format = "f", digits = 1, big.mark = "."), " T")
   } else {
-    paste0(formatC(valor, format = "f", digits = 1, big.mark = "."), " Milhões")
+    paste0(formatC(valor, format = "f", digits = 1, big.mark = "."), " M")
   }
 }
 # Aplicando formatação a cada coluna
@@ -89,25 +108,17 @@ kable(df_formatada, format = "latex", booktabs = TRUE,
       col.names = c("Estatística", "Distrito Federal", "Goiás", "Mato Grosso", "Mato Grosso do Sul"),
       align = "lrrrr")
 
-gráfico_análise2_medias <- ggplot(estatisticas, aes(x = UF, y = Media)) +
-  geom_col(fill = "#A11D21") +
-  geom_point(aes(y = Media), color = "white", shape = 23, size = 3) +
-  labs(
-    x = "Estados da região Centro-Oeste",
-    y = "Média dos recursos PCD"
+grafico_boxplot <- ggplot(centro_oeste) +
+  aes(x = UF, y = Quant_Recurso_PCD) +
+  geom_boxplot(fill = c("#A11D21"), width = 0.5) +
+  stat_summary(
+    fun = "mean", geom = "point", shape = 23, size = 3, fill = "white"
   ) +
+  labs(x = "Estados", y = "Valores da variação de recursos (em R$ milhões)") +
   theme_estat()
-gráfico_análise2_medias
+grafico_boxplot
 
-gráfico_análise2_dp <- ggplot(estatisticas, aes(x = UF, y = Desvio_Padrao)) +
-  geom_col(fill = "#A11D21") +
-  geom_point(aes(y = Desvio_Padrao), color = "white", shape = 23, size = 3) +
-  labs(
-    x = "Estados da região Centro-Oeste",
-    y = "Desvio Padrão dos recursos PCD"
-  ) +
-  theme_estat()
-gráfico_análise2_dp
+
 
 # código terceira análise 
 library(dplyr)
@@ -117,14 +128,27 @@ benef_por_regiao <- dados %>%
   summarise(Total_Beneficiarios_PCD = sum(Quant_Beneficiario_PCD, na.rm = TRUE)) %>%
   arrange(Reg, Ano)
 
+benef_por_regiao
 
-#código
+benef_por_regiao <- dados %>%
+  filter(Ano >= 2012 & Ano <= 2023) %>%
+  group_by(Reg, Ano) %>%
+  summarise(Total_Beneficiarios_PCD = sum(Quant_Beneficiario_PCD, na.rm = TRUE)) %>%
+  arrange(Reg, Ano) %>%
+  # Garantir que todos os anos apareçam para cada região
+  complete(Ano = full_seq(2012:2023, 1), fill = list(Total_Beneficiarios_PCD = 0))
 
-#gráfico de linha 
-gráfico_análise3 <- ggplot(benef_por_regiao) +
-  aes(x=Ano, y=Total_Beneficiarios_PCD,colour=Reg,  group= Reg) +
-  geom_line(size=1) + geom_point(colour="#A11D21",size=2) +
-  labs(x="Ano", y="Quantidade beneficiários PCD") +
-  theme_estat()+
-  theme(legend.position = "right")
+# Criar o gráfico de linha corrigido
+gráfico_análise3 <- ggplot(benef_por_regiao, aes(x = Ano, y = Total_Beneficiarios_PCD, colour = Reg, group = Reg)) +
+  geom_line(size = 1) + 
+  geom_point(colour = "#A11D21", size = 2) +
+  labs(x = "Ano", y = "Quantidade de beneficiários PCD", 
+       title = "Evolução de Beneficiários PCD por Região (2012-2023)") +
+  scale_x_continuous(breaks = 2012:2023, labels = 2012:2023) +
+  theme_estat() +
+  theme(
+    legend.position = "right",
+    plot.title = element_text(hjust = 0.5),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
 gráfico_análise3
