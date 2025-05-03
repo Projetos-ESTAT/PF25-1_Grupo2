@@ -25,7 +25,7 @@ Essas são duas análises do tipo quantitativas discretas, pois representam quan
 grafico1
 ```
 
-O $\ref{fig-0}$ é um gráfico de dispersão que mostra a relação entre Eixo X: Quantidade de recursos PcD e o eixo Y: Quantidade de recursos totais.
+A $\ref{fig-0}$ é um gráfico de dispersão que mostra a relação entre Eixo X: Quantidade de recursos PcD e o eixo Y: Quantidade de recursos totais.
 Cada ponto indica uma observação(e.g. , uma unidade, um setor) e a posição do ponto mostra quantas pessoas PcD existem em relação ao total de pessoas. 
 Os pontos formando uma subida da esquerda para direita, significa mais PcDs conforme aumenta o total, isso sugere uma correlação positiva.
 Ou seja, pelo gráfico dá para ver que possui uma grande concentração de pessoas PcD, em decorrência do total de pessoas. Mas também é possível analisar que quanto mais cresce a população em geral, menor é o tamanho da amostra (Quantidade pessoas PcD).
@@ -58,7 +58,7 @@ df_formatada
 
 grafico_boxplot
 ```
-Segundo o $\ref{fig-3}$ o Goiás possui a maior variabilidade com maiores outliers, chegando até 1.500 milhões. Distrito Federal ficando com a menor variabilidade, diante do Mato Grosso e do Mato Grosso do Sul.
+Segundo a $\ref{fig-3}$ o Goiás possui a maior variabilidade com maiores outliers, chegando até 1.500 milhões. Distrito Federal ficando com a menor variabilidade, diante do Mato Grosso e do Mato Grosso do Sul.
 
 
 ## Análise 5
@@ -80,8 +80,6 @@ há uma queda acentuada em 2019, especialmente no Nordeste, seguida de uma estab
 O nordeste apresenta maior número absoluto de beneficiários durante todo o período, ultrapassando 1 milhão em alguns anos Já o sudeste ocupa a segunda posição da região com maior número de beneficiários, mostrando crescimento constante de 2013 a 2018 e depois mantém-se estável, com uma recuperação em 2023.
 Por sua vez, o norte representa o menor número de beneficiários PCD, embora também mostre crescimento, especialmente a partir de 2022.
 Obs: Discrições possíveis de se ver através do gráfico foram desconsideradas nessa análise, sendo, claramente, auto-descritivas.
-
-
 
 ::: {#quad- layout-align="center" quad-pos="H"}
 ```{=latex}
