@@ -8,14 +8,99 @@ output-file: Vinícius Bittencourt Queiroz Barreto - análise 1, 3 e 5.
 source("rdocs/consultor3.R")
 ```
 # Introdução
+Este trabalho reúne três análises que ajudam a entender melhor a situação das pessoas com deficiência (PCD) no Brasil, especialmente em relação à distribuição de recursos e ao número de beneficiários ao longo dos anos.
+A primeira análise mostra como o número de colaboradores PCD se relaciona com o total de funcionários. A partir de um gráfico de dispersão.
+Na segunda parte, olhamos para a região Centro-Oeste e analisamos como a quantidade de recursos destinados a PCDs varia entre os estados. Aqui, usamos estatísticas como média, variância, desvio padrão, quartis e um boxplot para ilustrar melhor o resultado.
+Por fim, a terceira análise acompanha, de 2013 a 2023, como evoluiu o número de beneficiários PCD em cada região do país.
 
+# Referencial teórico
+
+## Média
+Se constitui como a razão entre a soma do valor das observações e o número total delas, dada pela fórmula:
+$$\bar{X}=\frac{\sum\limits_{i=1}^{n}X_i}{n}$$
+Com:
+\begin{itemize}
+\item $i = 1, \, 2, \, ..., \, n$
+\item $n = $ número total de observações
+\end{itemize}
+
+## Variância
+É uma medida que avalia o quanto que os dados estão dispersos em relação à média, em uma escala ao quadrado da escala dos dados que dificulta a interpretação dessa medida. 
+
+\subsubsection{Variância Populacional}
+Para uma população, a variância é dada por:
+$$\sigma^2=\frac{\sum\limits_{i=1}^{N}\left(X_i - \mu\right)^2}{N}$$
+
+Com:
+\begin{itemize}
+\item $X_i =$ $i$-ésima observação da população
+\item $\mu =$ média populacional
+\item $N =$ tamanho da população
+\end{itemize}
+
+## Desvio Padrão
+É a raiz quadrada da variância, haja vista a ideia de retirar a escala ao quadrado da variância para que se tenha uma medida mais facilmente interpretável. Avalia o quanto os dados estão dispersos em relação à média.
+
+\subsubsection{Desvio Padrão Populacional}
+Para uma população, o desvio padrão é dado por:
+$$\sigma=\sqrt{\frac{\sum\limits_{i=1}^{N}\left(X_i - \mu\right)^2}{N}}$$
+
+Com:
+\begin{itemize}
+\item $X_i =$ i-ésima observação da população
+\item $\mu =$ média populacional
+\item $N =$ tamanho da população
+\end{itemize}
+
+## Correlação de Pearson
+O coeficiente de correlação de Pearson é uma medida que verifica o grau de relação linear entre duas variáveis quantitativas. Este coeficiente varia entre os valores -1 e 1. O valor zero significa que não há relação linear entre as variáveis. Quando o valor do coeficiente $r$ é negativo, diz-se existir uma relação de grandeza inversamente proporcional entre as variáveis. Analogamente, quando $r$ é positivo, diz-se que as duas variáveis são diretamente proporcionais.
+
+O coeficiente de correlação de Pearson é normalmente representado pela letra $r$ e a sua fórmula de cálculo é: 
+
+$$r_{Pearson} = \frac{\displaystyle \sum_{i=1}^{n} \left [ \left(x_i-\bar{x}\right) \left(y_i-\bar{y}\right) \right]}{\sqrt{\displaystyle \sum_{i=1}^{n} x_i^2 - n\bar{x}^2}  \times \sqrt{\displaystyle \sum_{i=1}^{n} y_i^2 - n\bar{y}^2}}$$
+
+\noindent Onde: 
+\begin{itemize}
+\item $x_i=$ i-ésimo valor da variável $X$
+\item $y_i=$ i-ésimo valor da variável $Y$
+\item $\bar{x}=$ média dos valores da variável $X$
+\item $\bar{y}=$ média dos valores da variável $Y$
+\end{itemize}
+
+Vale ressaltar que o coeficiente de Pearson é paramétrico e, portanto, sensível quanto à normalidade (simetria) dos dados.
+
+## Boxplot
+O boxplot é uma representação gráfica na qual se pode perceber de forma mais clara como os dados estão distribuídos. A figura abaixo ilustra um exemplo de boxplot.
+
+![Exemplo de boxplot](images/box_uni.png){fig-align="center"}
+
+A parte inferior do retângulo corresponde ao primeiro quartil, enquanto a parte superior representa o terceiro quartil. O traço dentro do retângulo indica a mediana, que divide o conjunto de dados em duas partes de tamanhos iguais. A média é ilustrada por um losango branco, e os pontos representam os \textit{outliers}. \textit{Outliers} são valores discrepantes da série de dados, ou seja, valores que não refletem a realidade do conjunto.
+
+
+## Gráfico de Dispersão
+O gráfico de dispersão é uma representação gráfica utilizada para ilustrar o comportamento conjunto de duas variáveis quantitativas. A figura abaixo ilustra um exemplo de gráfico de dispersão, onde cada ponto representa uma observação do banco de dados.
+
+![Exemplo de Gráfico de Dispersão](images/disp_uni.png){fig-align="center"}
+
+## Quartis
+São separatrizes que dividem o conjunto de dados em quatro partes iguais. O primeiro quartil (ou inferior) delimita os 25% menores valores, o segundo representa a mediana, e o terceiro delimita os 25% maiores valores. Inicialmente deve-se calcular a posição do quartil:
+
+-   Posição do primeiro quartil $P_1$: $$P_1=\frac{n+1}{4}$$
+
+-   Posição da mediana (segundo quartil) $P_2$: $$P_2 = \frac{n+1}{2}$$
+
+-   Posição do terceiro quartil $P_3$: $$P_3=\frac{3 \times (n+1)}{4}$$
+
+Com $n$ sendo o tamanho da amostra. Dessa forma, $X_{\left( P_i \right)}$ é o valor do $i$-ésimo quartil, onde $X_{\left( j \right)}$ representa a $j$-ésima observação dos dados ordenados.
+
+Se o cálculo da posição resultar em uma fração, deve-se fazer a média entre o valor que está na posição do inteiro anterior e do seguinte ao da posição.
 
 # Análises 
 
 
-## Análise 1
-Análise da Quantidade de recursos PCD X Quantidade de recursos totais
-Essas são duas análises do tipo quantitativas discretas, pois representam quantidades inteiras,até porque são contagens de pessoas.Uma delas refere-se ao número de funcionários ou colaboradores com deficiência (PcD) e a outra a quantidade total de indivíduos (incluindo PcDs e não PcDs)
+## Análise da Quantidade de recursos PCD X Quantidade de recursos totais
+
+Essas são duas variáveis do tipo quantitativas discretas. Uma delas refere-se ao número de funcionários ou colaboradores com deficiência (PCD) e a outra a quantidade total de indivíduos (incluindo PCDs e não PCDs)
 
 ```{r}
 #| label: fig-0
@@ -25,61 +110,65 @@ Essas são duas análises do tipo quantitativas discretas, pois representam quan
 grafico1
 ```
 
-A $\ref{fig-0}$ é um gráfico de dispersão que mostra a relação entre Eixo X: Quantidade de recursos PcD e o eixo Y: Quantidade de recursos totais.
-Cada ponto indica uma observação(e.g. , uma unidade, um setor) e a posição do ponto mostra quantas pessoas PcD existem em relação ao total de pessoas. 
+A $\ref{fig-0}$ é um gráfico de dispersão que mostra a relação entre Eixo X: Quantidade de recursos PCD e o eixo Y: Quantidade de recursos totais.
+Cada ponto indica uma observação e a posição do ponto mostra quantas pessoas PCD existem em relação ao total de pessoas. 
 Os pontos formando uma subida da esquerda para direita, significa mais PcDs conforme aumenta o total, isso sugere uma correlação positiva.
-Ou seja, pelo gráfico dá para ver que possui uma grande concentração de pessoas PcD, em decorrência do total de pessoas. Mas também é possível analisar que quanto mais cresce a população em geral, menor é o tamanho da amostra (Quantidade pessoas PcD).
+Ou seja, pelo gráfico dá para ver que possui uma grande concentração de pessoas PCD, em decorrência do total de pessoas. Mas também é possível analisar que quanto mais cresce a população em geral, menor é o tamanho da amostra (Quantidade pessoas PCD).
+
+A correlação de 0,9837 entre os recursos destinados a pessoas com deficiência (PCD) e o total de recursos mostra algo muito importante: essas duas variáveis caminham juntas, de forma quase perfeita. Ou seja, sempre que o total de recursos aumenta, os recursos para PcD também aumentam e vice-versa.
+Isso revela que os recursos para PCD não são tratados como algo à parte, mas estão fortemente integrados ao planejamento geral. Lugares que investem mais no todo, também costumam investir mais na inclusão e acessibilidade.
+
+## Análise da Variação de recursos para PCD em cada estado da região Centro-Oeste
+A primeira variável (análise da variação de recursos para PCD) se classifica como quantitativa contínua, representando valores monetários que podem assumir qualquer número real, já a outra variável (estados da região centro-oeste) é qualitativa nominal.
 
 ```{r}
 #| label: fig-1
-#| fig-cap: "Tabela resumo das medidas descritivas "
-
-
-tabela_resumo
-```
-A correlação de Pearson entre Quant_Recurso_PCD e Quant_Recurso_Total é de aproximadamente 0,9837, o que indica uma correlação extremamente forte e positiva entre essas duas variáveis.
-
-## Análise 3
-Análise da Variação de recursos para PCD em cada estado da região Centro-Oeste
-Os resultados obtidos a partir da análise dos dados de recurso (PCD) na região Centro-Oeste foram calculados para cada estado, considerando o total de recursos por ano e a média, variância e desvio padrão desses valores ao longo do tempo. A partir dessas estatísticas, pôde-se observar como os recursos têm se comportado em termos de distribuição e variabilidade em cada estado da região (Distrito Federal, Goiás, Mato Grosso e Mato Grosso do Sul).
-À respeito da classificação das variáveis, as variáveis quantitativas são: "O número de PCDs atendidos" e "A variação anual de recursos". Já as variáveis qualitativas são: "Estados".
-```{r}
-#| label: fig-2
 #| fig-cap: "Tabela das medidas descritivas da variação de recursos para PCD na região Centro-Oeste "
 
 
-df_formatada
+print_quadro_resumo(variacao_recursos)
 ```
 
 ```{r}
-#| label: fig-3
+#| label: fig-2
 #| fig-cap: "Gráfico de Box-Plot "
 
 
 grafico_boxplot
 ```
-Segundo a $\ref{fig-3}$ o Goiás possui a maior variabilidade com maiores outliers, chegando até 1.500 milhões. Distrito Federal ficando com a menor variabilidade, diante do Mato Grosso e do Mato Grosso do Sul.
+Linha no meio da caixa: É a mediana, o valor do meio. Metade dos valores estão acima, metade abaixo. É como o "valor típico" da região.
+Parte inferior da caixa: Mostra onde estão os 25% valores mais baixos.
+Parte superior da caixa: Mostra onde estão os 25% valores mais altos.
+Linhas que saem da caixa:
+Mostram a variação "normal" dos dados (geralmente 1,5x a altura da caixa).
+Valores dentro dos bigodes são considerados comuns para aquela região.
+Pontos fora dos bigodes:
+São como "estrelas cadentes", valores raros, muito diferentes do padrão.
+Segundo a $\ref{fig-2}$ o Goiás possui a maior variabilidade com maiores outliers, chegando até 1.500 milhões. Distrito Federal ficando com a menor variabilidade, diante do Mato Grosso e do Mato Grosso do Sul.
 
 
-## Análise 5
-Análise da quantidade de beneficiários PCD por região de 2013 a 2023
-É possível identificar três tipos de variáveis presentes, "ano" sendo uma variável quantitativa discreta e as variáveis "região" e "estado (UF)" como qualitativa nominal.
-Já sobre o gráfico, apresenta a evolução anual do número de beneficiários PCD (Pessoas com Deficiência) no Brasil, organizados por região. A partir das linhas coloridas, é possível visualizar como a quantidade de beneficiários variou entre os anos analisados em cada região do país. O eixo horizontal (x) representa os anos, enquanto o eixo vertical (y) mostra a quantidade total de beneficiários registrados.
+## Análise da quantidade de beneficiários PCD por região de 2013 a 2023
+
+É possível identificar dois tipos de variáveis presentes, "ano" sendo uma variável quantitativa discreta e a outra "região" como qualitativa nominal.
+Já sobre o gráfico, apresenta a evolução anual do número de beneficiários PCD (pessoas com deficiência) no Brasil, organizados por região. A partir das linhas coloridas, é possível visualizar como a quantidade de beneficiários variou entre os anos analisados em cada região do país.
 Cada linha corresponde a uma região específica, destacada por uma cor diferente, permitindo observar e comparar padrões regionais de crescimento, estabilidade ou queda no número de beneficiários. Os pontos vermelhos sobre as linhas destacam os valores individuais para cada ano, facilitando a leitura e o acompanhamento das mudanças ao longo do tempo.
 
 ```{r}
-#| label: fig-4
+#| label: fig-3
 #| fig-cap: "Gráfico de linhas da quantidade de beneficiários PCD por região de 2013 a 2023"
 
 
 gráfico_análise3
 ```
 
-A maioria das regiões mostra crescimento ou estabilidade no número de beneficiários PcD ao longo dos anos, porém
+A maioria das regiões mostra crescimento ou estabilidade no número de beneficiários PCD ao longo dos anos, porém
 há uma queda acentuada em 2019, especialmente no Nordeste, seguida de uma estabilização e posterior retomada de crescimento até 2023.
 O nordeste apresenta maior número absoluto de beneficiários durante todo o período, ultrapassando 1 milhão em alguns anos Já o sudeste ocupa a segunda posição da região com maior número de beneficiários, mostrando crescimento constante de 2013 a 2018 e depois mantém-se estável, com uma recuperação em 2023.
 Por sua vez, o norte representa o menor número de beneficiários PCD, embora também mostre crescimento, especialmente a partir de 2022.
 Obs: Discrições possíveis de se ver através do gráfico foram desconsideradas nessa análise, sendo, claramente, auto-descritivas.
+
+# Conclusão
+
 
 ::: {#quad- layout-align="center" quad-pos="H"}
 ```{=latex}
