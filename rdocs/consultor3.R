@@ -1,59 +1,20 @@
-source("rdocs/source/packages.R")
+source("C:/Users/vinic/Downloads/PF25-1_Grupo2-main/rdocs/source/packages.R")
 
-# ---------------------------------------------------------------------------- #
-
-#        ______   _____  ________      ________ 
-#      |  ____| / ____| |__   __| /\  |__   __|
-#     | |__    | (___     | |   /  \    | |   
-#    |  __|    \___ \    | |  / /\ \   | |   
-#   | |____   ____) |   | |  /____ \  | |   
-#  |______   |_____/   |_| /_/    \_\|_|   
-#  
-#         Consultoria estatística 
-#
-
-# ---------------------------------------------------------------------------- #
-# ############################## README ###################################### #
-# Consultor, favor utilizar este arquivo .R para realizar TODAS as análises
-# alocadas a você neste projeto pelo gerente responsável, salvo instrução 
-# explícita do gerente para mudança.
-#
-# Escreva seu código da forma mais clara e legível possível, eliminando códigos
-# de teste depreciados, ou ao menos deixando como comentário. Dê preferência
-# as funções dos pacotes contidos no Tidyverse para realizar suas análises.
-# ---------------------------------------------------------------------------- #
 # codigo primeira análise
-dados <- read.csv("C:/Users/Usuario/Downloads/Dados PcD.csv")
+dados <- read.csv("C:/Users/vinic/Downloads/Dados PcD.csv")
 library(ggplot2)
-grafico1 = ggplot(dados) +
+library(scales)
+
+grafico1 <- ggplot(dados) +
   aes(x = Quant_Recurso_PCD , y = Quant_Recurso_Total) +
   geom_point(colour = "#A11D21", size = 3) +
+  scale_x_continuous(labels = label_comma(big.mark = ".", decimal.mark = ",")) +
   labs(
-    x = "Quantidade de recursos PCD)",
-    y = "Quantidade de recursos totais)"
+    x = "Quantidade de recursos PCD",
+    y = "Quantidade de recursos totais"
   ) +
   theme_estat()
-
 grafico1
-
-media_pcd <- mean(dados$Quant_Recurso_PCD, na.rm = TRUE)
-media_total <- mean(dados$Quant_Recurso_Total, na.rm = TRUE)
-mediana_pcd <- median(dados$Quant_Recurso_PCD, na.rm = TRUE)
-mediana_total <- median(dados$Quant_Recurso_Total, na.rm = TRUE)
-variancia_pcd <- var(dados$Quant_Recurso_PCD, na.rm = TRUE)
-variancia_total <- var(dados$Quant_Recurso_Total, na.rm = TRUE)
-desvio_pcd <- sd(dados$Quant_Recurso_PCD, na.rm = TRUE)
-desvio_total <- sd(dados$Quant_Recurso_Total, na.rm = TRUE)
-correlacao <- cor(dados$Quant_Recurso_PCD, dados$Quant_Recurso_Total, method = "pearson", use = "complete.obs")
-
-tabela_resumo <- data.frame(
-  Medida = c("Média", "Mediana", "Variância", "DP", "Corr de Pearson"),
-  Quant_Recurso_PCD = c(media_pcd, mediana_pcd, variancia_pcd, desvio_pcd, correlacao),
-  Quant_Recurso_Total = c(media_total, mediana_total, variancia_total, desvio_total, correlacao)
-)
-
-
-
 
 # codigo segunda análise 
 library(dplyr)
@@ -96,27 +57,39 @@ formatar_valor <- function(valor, estat) {
     paste0(formatC(valor, format = "f", digits = 1, big.mark = "."), " M")
   }
 }
-# Aplicando formatação a cada coluna
-df_formatada <- df
-df_formatada$Distrito_Federal <- mapply(formatar_valor, df$Distrito_Federal, df$Estatística)
-df_formatada$Goias <- mapply(formatar_valor, df$Goias, df$Estatística)
-df_formatada$Mato_Grosso <- mapply(formatar_valor, df$Mato_Grosso, df$Estatística)
-df_formatada$Mato_Grosso_do_Sul <- mapply(formatar_valor, df$Mato_Grosso_do_Sul, df$Estatística)
-# Renderizando a tabela com kable
-kable(df_formatada, format = "latex", booktabs = TRUE,
-      caption = "Medidas resumo da(o) [nome da variável]",
-      col.names = c("Estatística", "Distrito Federal", "Goiás", "Mato Grosso", "Mato Grosso do Sul"),
-      align = "lrrrr")
 
-grafico_boxplot <- ggplot(centro_oeste) +
-  aes(x = UF, y = Quant_Recurso_PCD) +
+variacao_recursos %>%
+  summarize(
+    Média = round(mean(Total_Recursos), 2),
+    `Desvio Padrão` = round(sd(Total_Recursos), 2),
+    Variância = round(var(Total_Recursos), 2),
+    Mínimo = round(min(Total_Recursos), 2),
+    `1º Quartil` = round(quantile(Total_Recursos, 0.25), 2),
+    Mediana = round(quantile(Total_Recursos, 0.5), 2),
+    `3º Quartil` = round(quantile(Total_Recursos, 0.75), 2),
+    Máximo = round(max(Total_Recursos), 2)
+  ) %>%
+  t() %>%
+  as.data.frame() %>%
+  rownames_to_column(var = "Medida")
+
+print_quadro_resumo <- function(variacao_recursos, title="Medidas resumo da [variação de recursos para PCD em cada estado da região centro-Oeste]", label="quad:quadro_resumo1")
+
+  
+grafico_boxplot <- ggplot(variacao_recursos) +
+  aes(x = UF, y = Total_Recursos) +
   geom_boxplot(fill = c("#A11D21"), width = 0.5) +
   stat_summary(
     fun = "mean", geom = "point", shape = 23, size = 3, fill = "white"
+  ) +  scale_y_continuous(labels = label_number(scale = 1e-6, suffix = " mi")) +
+  labs(
+    title = "Distribuição da Variação de Recursos para PCD",
+    x = "Unidades Federativas",
+    y = "Recursos (R$ milhões)"
   ) +
-  labs(x = "Estados", y = "Valores da variação de recursos (em R$ milhões)") +
   theme_estat()
 grafico_boxplot
+
 
 
 
@@ -152,3 +125,4 @@ gráfico_análise3 <- ggplot(benef_por_regiao, aes(x = Ano, y = Total_Beneficiar
     axis.text.x = element_text(angle = 45, hjust = 1)
   )
 gráfico_análise3
+
