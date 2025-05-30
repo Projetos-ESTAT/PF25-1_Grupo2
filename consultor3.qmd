@@ -122,28 +122,43 @@ Isso revela que os recursos para PCD não são tratados como algo à parte, mas 
 A primeira variável (análise da variação de recursos para PCD) se classifica como quantitativa contínua, representando valores monetários que podem assumir qualquer número real, já a outra variável (estados da região centro-oeste) é qualitativa nominal.
 
 ```{r}
-#| label: fig-1
-#| fig-cap: "Tabela das medidas descritivas da variação de recursos para PCD na região Centro-Oeste "
-
-
-print_quadro_resumo(variacao_recursos)
-```
-
-```{r}
 #| label: fig-2
-#| fig-cap: "Gráfico de Box-Plot "
+#| fig-cap: "Boxplot da variação de recursos para PCD em cada estado da região Centro-Oeste"
 
 
-grafico_boxplot
+ggplot(variacao_recursos) +
+  aes(x = UF, y = Total_Recursos) +
+  geom_boxplot(fill = c("#A11D21"), width = 0.5) +
+  stat_summary(
+    fun = "mean", geom = "point", shape = 23, size = 3, fill = "white"
+  ) +  scale_y_continuous(labels = label_number(scale = 1e-6, suffix = " mi")) +
+  labs(
+    x = "Unidades Federativas",
+    y = "Recursos (R$ milhões)"
+  ) +
+  theme_estat()
 ```
-Linha no meio da caixa: É a mediana, o valor do meio. Metade dos valores estão acima, metade abaixo. É como o "valor típico" da região.
-Parte inferior da caixa: Mostra onde estão os 25% valores mais baixos.
-Parte superior da caixa: Mostra onde estão os 25% valores mais altos.
-Linhas que saem da caixa:
-Mostram a variação "normal" dos dados (geralmente 1,5x a altura da caixa).
-Valores dentro dos bigodes são considerados comuns para aquela região.
-Pontos fora dos bigodes:
-São como "estrelas cadentes", valores raros, muito diferentes do padrão.
+
+::: {#quad-probreza_pobreza_esxtrema_total layout-align="center" quad-pos="H"}
+\begin{tabular}{|l|rrrr|}
+\hline
+\textbf{Medida} &
+  \multicolumn{1}{c}{\textbf{Distrito Federal}} &
+  \multicolumn{1}{c}{\textbf{Goiás}} &
+  \multicolumn{1}{c}{\textbf{Mato Grosso}} &
+  \multicolumn{1}{c|}{\textbf{Mato Grosso do Sul}} \\ \hline
+Média         & 206,50   & 619,67    & 337,67   & 301,20   \\
+Desvio Padrão & 141,73   & 429,23    & 209,26   & 206,27   \\
+Variância     & 20088,68 & 184241,00 & 43791,32 & 42548,18 \\
+Mínimo        & 4,4      & 14,4      & 10,1     & 7,1      \\
+1º Quartil    & 82,5     & 237,9     & 152,8    & 101,5    \\
+Mediana       & 192,0    & 551,6     & 319,6    & 293,3    \\
+3º Quartil    & 325,2    & 959,2     & 509,3    & 459,2    \\
+Máximo        & 506,8    & 1516,3    & 754,3    & 720,0    \\ \hline
+\end{tabular}
+Quadro de medidas resumo dos diferentes níveis de pobreza e total
+:::
+
 Segundo a $\ref{fig-2}$ o Goiás possui a maior variabilidade com maiores outliers, chegando até 1.500 milhões. Distrito Federal ficando com a menor variabilidade, diante do Mato Grosso e do Mato Grosso do Sul.
 
 
